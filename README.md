@@ -1,6 +1,6 @@
- # Public Transportation App
+ #Public Transportation App
  
- ## Requirements
+ ##Requirements
  
  You must build an application that allows users to select a departure and arrival train station. 
  The user will then see information about the two stations. The information you provide may include connected stations on the path, 
