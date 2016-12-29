@@ -1,0 +1,14 @@
+{
+  "name": "public-tranport-app",
+  "description": "an application that allows users to select a departure and arrival train station. The user will then see information about the two stations.",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

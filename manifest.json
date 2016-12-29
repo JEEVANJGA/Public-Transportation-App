@@ -1,0 +1,7 @@
+{
+  "name": "public-tranport-app",
+  "short_name": "public-tranport-app",
+  "description": "an application that allows users to select a departure and arrival train station. The user will then see information about the two stations.",
+  "start_url": "/",
+  "display": "standalone"
+}
