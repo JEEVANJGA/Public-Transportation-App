@@ -13,8 +13,28 @@
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="import" href="/src/transit-app/transit-app.html">
+     <!--
+     <script>
+          if(navigator.serviceWorker){
+              navigator.serviceWorker.register('./service-worker.js').then(function(reg){
+                  console.log('WORKED');              
+              }).catch(function(){
+                  console.log('FAILED');
+              });          
+          }
+        </script>
+        -->
   </head>
   <body>
     <transit-app></transit-app>
   </body>
+   <style type="text/css">
+    body {
+    background-image: url("images/trainstation.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    }       
+</style>
 </html>
