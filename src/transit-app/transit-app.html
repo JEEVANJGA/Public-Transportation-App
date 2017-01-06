@@ -264,15 +264,13 @@
                                                         document.getElementById("det").style.display = "none";
                                                         document.getElementById("sstation").style.display = "inline-block";
                                                         document.getElementById("sstation").innerHTML ="<strong>Same Station<strong>"; 
-                                                        document.getElementById(det).innerHTML="<strong>Same Stations</strong>"; 
+                                                        document.getElementById(det).innerHTML="<strong>"+"Same Stations"+"</strong>"; 
 
                                                       }
                                                       else {
                                                         document.getElementById("det").style.display = "inline-block";
                                                         document.getElementById("sstation").style.display = "none";
-                                                      }
-
-                                                            //Promise that obtains the requested schedule
+                                                        //Promise that obtains the requested schedule
                                                             fetch('http://api.bart.gov/api/sched.aspx?cmd=depart&orig='+from+'&dest='+to+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                                                       if(response.ok) {
                                                                         response.text().then(function(myText) {
@@ -286,6 +284,7 @@
                                                                         })
                                                                       }                                                          
                                                                    }); 
+                                                      }   
                                                     }                                              
                                                                                      
                               </script>
