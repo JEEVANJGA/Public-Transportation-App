@@ -5,6 +5,9 @@ You must build an application that allows users to select a departure and arriva
 
 an application that allows users to select a departure and arrival train station. The user will then see information about the two stations.
 
+## Demo site
+* https://public-transport-app-9b2f4.firebaseapp.com/
+
 ##Online Functionality:
 
 * Display Realtime Schedule for requested Departure and Arrival Stations
@@ -13,6 +16,7 @@ an application that allows users to select a departure and arrival train station
 ##Offline Functionality:
 
 * Display Train Schedule available from Departure station selected last.
+* Before refreshing, items under dropdown could be selected but Response request will not be accessed due to offline. So Data dispalyed   at that time is the response received during Online.
 
 ##Notes:
 
@@ -56,6 +60,5 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
-
 
 
