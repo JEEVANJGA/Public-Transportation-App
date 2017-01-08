@@ -5,6 +5,9 @@ You must build an application that allows users to select a departure and arriva
 
 an application that allows users to select a departure and arrival train station. The user will then see information about the two stations.
 
+## Demo site
+* https://public-transport-app-9b2f4.firebaseapp.com/
+
 ##Online Functionality:
 
 * Display Realtime Schedule for requested Departure and Arrival Stations
