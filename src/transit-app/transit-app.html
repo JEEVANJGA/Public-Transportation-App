@@ -168,7 +168,7 @@
                                    
                                   /* script to get Station Name and Station abbreviation into an array object*/   
                                    Stationn.stationnames = [];
-                                     fetch('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response){
+                                     fetch('https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                         if(response.ok) {
                                         response.text().then(function(myText) {
                                             let x2js = new X2JS();
@@ -225,7 +225,7 @@
                                                           to= to[0].id;  //Abbreviation obtained though filtering after dropdown selection
                                                           console.log("to "+ to);
                                                           
-                                                          fetch('http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig='+from+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
+                                                          fetch('https://api.bart.gov/api/sched.aspx?cmd=stnsched&orig='+from+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                                                                 if(response.ok) {
                                                                                   response.text().then(function(myText) {
                                                                                     let x2js = new X2JS();
@@ -265,7 +265,7 @@
                                                                   document.getElementById("det").style.display = "block";
                                                                   document.getElementById("sstation").style.display = "none";
                                                                   //Promise that obtains the requested schedule
-                                                                      fetch('http://api.bart.gov/api/sched.aspx?cmd=depart&orig='+from+'&dest='+to+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
+                                                                      fetch('https://api.bart.gov/api/sched.aspx?cmd=depart&orig='+from+'&dest='+to+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                                                                 if(response.ok) {
                                                                                   response.text().then(function(myText) {
                                                                                     let x2js = new X2JS();
