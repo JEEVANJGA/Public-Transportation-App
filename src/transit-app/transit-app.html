@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/idb-node/idb-node.html">
 <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
 <dom-module id="transit-app">
@@ -62,17 +63,16 @@
                      }
                      
                     paper-dropdown-menu ~ paper-dropdown-menu {
-                                  padding-left: 20%;
+                                  margin-left: 20%;
                                   }
                       span ~ span {
-                                  padding-left: 33%;
+                                  margin-left: 33%;
                                   }
                        #origin ~ #destination{
-                                  padding-left: 30%;
+                                  margin-left: 30%;
                                   }
                        paper-button {
-                                  margin-left: 38%;
-
+                                  margin-left: 38%;                                
                                   }
                       #det,#sstation{
                         margin-top: 4%;
@@ -133,7 +133,9 @@
                                           <span>Selected Station Code: [[selectedv]]</span> </br>
                                           <paper-button raised noink onclick='search()'>Search</paper-button>
                                           <br>
-                                          <div id="sstation" style="display: none;"></div>
+                                          <!--Departure Station selected  -->
+                                          <div id="sstation" style="display: none;"></div> 
+                                          
                                           <div id="det" style="display: none;">
                                           <!--Schedule Display--> 
                                                 <table>
@@ -160,7 +162,11 @@
                               </template>
                                <script src="../../xml2json.js"></script>
                                 <script>
-                                  /* script to get Station Name and Station abbreviation into an array object*/
+                                //IndexedDB reference....
+                                   var idb = document.querySelector('idb-node');
+                                   var db = document.querySelector('#db');
+                                   
+                                  /* script to get Station Name and Station abbreviation into an array object*/   
                                    Stationn.stationnames = [];
                                      fetch('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                         if(response.ok) {
@@ -179,7 +185,9 @@
                                                     StationListArray.push(tempObj);
                                                  }
                                                  Stationn.stationnames=StationListArray;                                 
-                                                 console.log(Stationn.stationnames);                         
+                                                 console.log(Stationn.stationnames);
+                                                 return(Stationn.stationnames);
+                                                                   
                                           });
                                         }
                                       }); 
@@ -197,9 +205,15 @@
                                                                    if(item.Name==selectedItemf)
                                                                     from.push(item);                                               
                                                           });
+
+                                                          db.deleteAll(); //delete previous entry
+                                                          db.put(from[0]).then(function(item) { // Add new entry
+                                                          console.log(item);
+                                                          }); 
                                                           //console.log(from[0].id);
                                                           from= from[0].id;  //Abbreviation obtained though filtering after dropdown selection
                                                           console.log("from "+from);
+
 
                                                           var selectedItemto = document.querySelector('#to').value;
                                                           //console.log(selectedItemto);
@@ -211,20 +225,30 @@
                                                           to= to[0].id;  //Abbreviation obtained though filtering after dropdown selection
                                                           console.log("to "+ to);
                                                           
-                                                          fetch('http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig='+from+'&key=MW9S-E7SL-26DU-VV8V',{cache: "force-cache"}).then(function(response){
+                                                          fetch('http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig='+from+'&key=MW9S-E7SL-26DU-VV8V').then(function(response){
                                                                                 if(response.ok) {
                                                                                   response.text().then(function(myText) {
                                                                                     let x2js = new X2JS();
                                                                                     let jsonObj = x2js.xml_str2json( myText );
                                                                                     //let StationArray=[];
-                                                                                    let StationchedArray = jsonObj.root.station;
+                                                                                    let StationchedArray = jsonObj.root.station.item;
                                                                                     //console.log(StationschedArray);
                                                                                     Stationched.schedule= StationchedArray;
                                                                                     console.log(Stationched.schedule);
+                                                                                      db1.deleteAll(); //delete previous Schedule entry
+                                                                                      db1.putBulk(Stationched.schedule).then(function(item) { //Add new Schedule entry
+                                                                                      console.log(item);
+                                                                                      }); 
                                                                                   })
                                                                                 }                                                          
                                                                              }); 
-                                                          document.getElementById('depstn').innerHTML= selectedItemf;
+  
+                                                          document.getElementById("offline").style.display = "block";   
+                                                          document.getElementById('depstn').innerHTML= selectedItemf; //live update
+                                                          
+                                                          db.getAll().then(function(data) {    //update after refresh
+                                                          document.getElementById('depstn').innerHTML= data[0].Name;
+                                                        }); 
 
                                                           document.getElementById("origin").innerHTML ="<strong>"+selectedItemf+"<strong>"; 
                                                           document.getElementById("destination").innerHTML ="<strong>"+selectedItemto+"<strong>"; 
@@ -256,52 +280,54 @@
                                                                              }); 
                                                                 }   
                                                             
-                                                        }  
+                                                        } 
+
+                                      db.getAll().then(function(data) {  
+                                      document.getElementById('depstn').innerHTML= data[0].Name;
+                                    }); 
+                                       db1.getAll().then(function(data) {                                       
+                                      document.querySelector('#Stationched').schedule = data;
+                                    }); 
+                                                                                      
+
                                       if (!navigator.onLine) {
                                          document.getElementById("online").style.display = "none";
+                                         document.getElementById("offline").style.display = "block";
                                       }
                                                                
                                 </script>
-                               <!-- 
-                                <script>
-                                  import idb from 'idb';
-
-                                                        var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
-                                                          switch(upgradeDb.oldVersion) {
-                                                            case 0:
-                                                              var stationlistStore = upgradeDb.createObjectStore('stationlist');
-                                                             // keyValStore.put("world", "hello");
-                                                            case 1:
-                                                             var stationscheduleStore = upgradeDb.createObjectStore('stationschedule');
-                                                          }
-                                                        });
-                                </script>
-								-->
+     
                     </div>
          </div></br>
-         <div id="offline">
+         <div id="offline" style="display: none;">
                 <template is="dom-bind" id="Stationched">
                     <div style="margin-left: 30%; margin-top: 2%;"> Departure station selected last - <strong id="depstn"></strong></div>
                   <div id="stnched" style="margin-left: 20%">
                     <table style="width: 75%;background-position: center;">
                                 <tr>
-                                  <th>Origin</th>
                                   <th>Departure</th>
                                   <th>Destination</th>
                                   <th>Arrival</th>
+                                  <th>Train Id</th>
+                                  <th>Route</th>
                                 </tr>
-                                <template is="dom-repeat" items='[[schedule.item]]' as="item">
+                                <template is="dom-repeat" items="{{schedule}}" as="item">
                                       <tr>
-                                        <td>[[schedule.abbr]]</td>
                                         <td>[[item._origTime]]</td> 
                                         <td>[[item._trainHeadStation]]</td>
                                         <td>[[item._destTime]]</td>
+                                        <td>[[item._trainId]]</td>
+                                        <td>[[item._line]]</td>
                                       </tr>
                                 </template>
                     </table> 
                   </div>
                 </template>
          </div>
+         <idb-node id="db" database-name="StationlistDB" version="1" object-store="stationlist" key-path="id">
+         <idb-node id="db1" database-name="StationscheduleDB" version="1" object-store="stationsched" key-path="_origTime">
+         </idb-node>
+        
        </div>
     </paper-card>  
   </template>
@@ -322,6 +348,3 @@
   </script>
   
 </dom-module>
-<!--
-<script type="text/javascript" src="app.js"></script>
--->

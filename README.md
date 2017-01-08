@@ -5,9 +5,26 @@ You must build an application that allows users to select a departure and arriva
 
 an application that allows users to select a departure and arrival train station. The user will then see information about the two stations.
 
+##Online Functionality:
+
+* Display Realtime Schedule for requested Departure and Arrival Stations
+* Display Train Schedule available from Departure station selected
+
+##Offline Functionality:
+
+* Display Train Schedule available from Departure station selected last.
+
+##Notes:
+
+* Service-worker.js file is generated at the time of build.
+* IndexedDB is used using idb-node bower component.
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
+
+## Use bower install
+	Install packages with bower install. Bower installs packages to bower_components/.
 
 ## Viewing Your Application
 
@@ -39,3 +56,6 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+
+

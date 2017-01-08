@@ -1,6 +1,3 @@
-
-
-
 /* Sevic-worker code inspired from Wittr project explained in Building offline-First web apps provided by Udacity 
 var staticCacheName = 'Udacity-BART-static-v1';
 
