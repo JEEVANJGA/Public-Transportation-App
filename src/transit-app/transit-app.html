@@ -185,7 +185,7 @@
                                       }); 
 
                                       Stationn.tripdetails = [];
-
+                                      Stationched.schedule = [];
                                         /* function that gets invoked on clicking the paper button*/
                                       function search() { 
                                                           var from= [];
@@ -260,8 +260,23 @@
                                       if (!navigator.onLine) {
                                          document.getElementById("online").style.display = "none";
                                       }
-                                                                     
+                                                               
                                 </script>
+                               <!-- 
+                                <script>
+                                  import idb from 'idb';
+
+                                                        var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
+                                                          switch(upgradeDb.oldVersion) {
+                                                            case 0:
+                                                              var stationlistStore = upgradeDb.createObjectStore('stationlist');
+                                                             // keyValStore.put("world", "hello");
+                                                            case 1:
+                                                             var stationscheduleStore = upgradeDb.createObjectStore('stationschedule');
+                                                          }
+                                                        });
+                                </script>
+								-->
                     </div>
          </div></br>
          <div id="offline">

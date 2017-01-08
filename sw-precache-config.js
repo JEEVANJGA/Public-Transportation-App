@@ -2,7 +2,7 @@ module.exports = {
   staticFileGlobs: [
     '/index.html',
     '/bower_components/webcomponentsjs/webcomponents-lite.min.js',
-    '/images/*',
+    '/images/**.*',
     '/manifest.json',
     '/src/transit-app/*'
     

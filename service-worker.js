@@ -1,4 +1,4 @@
-/*importScripts('./serviceworker-cache-polyfill.js');
+
 
 
 /* Sevic-worker code inspired from Wittr project explained in Building offline-First web apps provided by Udacity 
