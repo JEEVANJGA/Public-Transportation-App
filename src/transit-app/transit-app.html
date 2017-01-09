@@ -25,6 +25,7 @@
                       --paper-toolbar-title: {
                         font-style: inherit;
                         font-weight: bold;
+                        @apply(--layout-center);
                       };
                     }
                       /*paper card styling */
@@ -82,8 +83,7 @@
                                   @apply(--layout-center-justified); 
                                   @apply(--layout-self-center); 
                                   width:50%; 
-                                   margin-left: 25%;
-                                   margin-right: 25%;                            
+                                                              
                                   }
                      paper-dropdown-menu  {
                                   
@@ -94,23 +94,18 @@
                         margin-top: 4%;
                         @apply(--layout-self-center);                        
                       }
-                      #sstation{
-                        margin-top: 4%;
-                        margin-left: 38%;
-                        margin-right: 5%
-                        @apply(--layout-self-center);                       
-                      }
+                      
                       table {   @apply(--layout-self-center);
                                 font-family: arial, sans-serif;
                                 border-collapse: collapse;
-                                width: 80%;
+                                width: 100%;
                                  
                             }
 
                      th,td {    @apply(--layout-self-center);
                                 border: 1px solid #dddddd;
                                 text-align: center;
-                                padding: 4%;
+                                padding: 4.5%;
                             }
 
                      tr:nth-child(odd) {
@@ -118,8 +113,8 @@
                             }
     </style>
     <paper-header-panel class="flex" mode="waterfall" >
-      <paper-toolbar class="red"; style="height: 110px;">
-      <div class="logo title" ><a href="/" aria-label="Transit Home">[[prop1]]</a></div>
+      <paper-toolbar class="red"; style="width:100%; height: 6%;">
+        <div class="logo title" ><a href="/" aria-label="Transit Home">[[prop1]]</a></div>
       </paper-toolbar>
     </paper-header-panel>
     <paper-card  heading="Departure - Arrival" >
@@ -144,8 +139,8 @@
                                                 </template>
                                             </paper-listbox>
                                           </paper-dropdown-menu> <br>
-                                          <span style="margin-left: 30%;">Selected Station Code: [[selectedu]]</span>
-                                          <span style="margin-left: 30%;">Selected Station Code: [[selectedv]]</span> </br>
+                                          <span >Selected Station Code: [[selectedu]]</span>
+                                          <span >Selected Station Code: [[selectedv]]</span> </br>
                                           <paper-button raised noink onclick='search()'>Search</paper-button>
                                           <br>
                                           <!--Departure Station selected  -->
